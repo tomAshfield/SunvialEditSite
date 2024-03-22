@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunvial Edit Site</title>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+    
+    <div class="container">
+        <div class="btn_box_container" id="btn_box_container">
+            <div class="log_in">
+                <button id="signInButton">Create Account / Sign In</button>
+                <button id="signOutButton">Sign Out</button>
+
+                <div id="message">
+                    <p>You have signed in as <span id="userName"></span> with the email <span id="userEmail"></span> </p>
+                </div>
+            </div>
+            <h1 class="starting_title">WHAT SECTION WOULD YOU LIKE TO EDIT?</h1>
+            <div class="button_box">
+                <button class="video_btn" id="video_btn">Video Section</button>
+                <button class="gig_btn" id="gig_btn">Gig Section</button>
+                <button class="merch_btn" id="merch_btn">Merch Section</button>
+                <button class="music_btn" id="music_btn">Album Section</button>
+                <button class="slideshow_btn" id="slideshow_btn">Slideshow Section</button>
+            </div>
+        </div>
+
+        <div class="video-form-container" id="video-form-container">
+            <div class="item_showcase">
+                
+            </div>
+            <input class="currentVideoID" id="currentVideoID" type="text">
+            <label>Image Name</label> <input type="text" id="nameBox"> <br><br> <label id="extention"></label> <br><br>
+            <video id="myImg" autoplay loop muted>
+                <source id="videoSource" src="" type="video/mp4">
+              </video>
+            <label id="uploadProgress"></label> <br><br>
+            <div class="video_btn_container">
+                <button class="selBtn" id="selBtn">Select Video</button>
+                <button class="upBtn" id="upBtn">Upload</button>
+                <button class="deleteBtn">Delete</button>
+                <button class="clearBtn">Clear</button>
+            </div>
+            <button class="go_back">Go Back</button>
+        </div>
+        
+        <div class="gig-form-container" id="gig-form-container">
+            <div class="item_showcase">
+                
+            </div>
+            <input class="currentGigID" id="currentGigID" type="text">
+            <input class="date" id="date" type="text" placeholder="date">
+            <input class="location" id="location" type="text" placeholder="location">
+            <input class="state" id="state" type="text" placeholder="state">
+            <input class="flyer" id="flyer" type="text" placeholder="flyer">
+            <button class="selBtn" id="selFlyerBtn">Select Flyer</button> <br><br>
+            <img class="gigImage" id="gigImage">
+            <div class="gig_btn_container">
+                <button class="writeBtn">Add</button>
+                <button class="deleteBtn">Delete</button>
+                <button class="clearBtn">Clear</button>
+            </div>
+                <button class="go_back">Go Back</button>
+            </div>
+        </div>
+
+        <div class="merch-form-container" id="merch-form-container">
+            <div class="item_showcase">
+                
+            </div>
+            <input class="currentMerchID" id="currentMerchID" type="text">
+            <input class="item_name" id="item_name" type="text" placeholder="Item Name">
+            <input class="shop_link" id="shop_link" type="text" placeholder="Item Store Link">
+            <input class="shop_image" id="shop_image" type="text" placeholder="Item Image Link"> <br><br>
+            
+            <button class="selBtn" id="selMerchBtn">Select Image</button> <br><br>
+            <img class="gigImage" id="merchImage">
+
+            <div class="merch_btn_container">
+                <button class="writeBtn">Add</button>
+                <button class="deleteBtn">Delete</button>
+                <button class="clearBtn">Clear</button>
+            </div>
+                <button class="go_back">Go Back</button>
+            </div>
+        </div>
+
+        <div class="album-form-container" id="album-form-container">
+            <div class="item_showcase">
+                
+            </div>
+            <input class="currentAlbumID" id="currentAlbumID" type="text">
+            <input class="album_name" id="album_name" type="text" placeholder="Name of Album/Single">
+            <input class="spotify_link" id="spotify_link" type="text" placeholder="Spotify Link">
+            <input class="album_image" id="album_image" type="text" placeholder="Item Image Link"> <br><br>
+            
+            <button class="selBtn" id="selMusicBtn">Select Image</button> <br><br>
+            <img class="gigImage" id="musicImage">
+            
+            <div class="album_btn_container">
+                <button class="writeBtn">Add</button>
+                <button class="deleteBtn">Delete</button>
+                <button class="clearBtn">Clear</button>
+            </div>
+                <button class="go_back">Go Back</button>
+            </div>
+        </div>
+
+        <div class="slideshow-form-container" id="slideshow-form-container">
+            <div class="item_showcase">
+                
+            </div>
+            <input class="currentSlideshowID" id="currentSlideshowID" type="text">
+            <input class="band_image_title" id="band_image_title" type="text" placeholder="Image Title">
+            <input class="band_image_link" id="band_image_link" type="text" placeholder="Link to Image"> <br><br>
+            
+            <button class="selBtn" id="selSlideshowBtn">Select Image</button> <br><br>
+            <img class="gigImage" id="slideshowImage">
+            
+            <div class="slideshow_btn_container">
+                <button class="writeBtn">Add</button>
+                <button class="deleteBtn">Delete</button>
+                <button class="clearBtn">Clear</button>
+            </div>
+            <button class="go_back">Go Back</button>
+        </div>
+    </div>
+
+    
+    
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import{ getStorage, ref as sRef, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js"
+        import{getDatabase, ref, child, get, set, remove, update} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyBs1Cw7qeS6w1GDivDVDvwWmhCulrStmmE",
+          authDomain: "sunvial-83daf.firebaseapp.com",
+          databaseURL: "https://sunvial-83daf-default-rtdb.firebaseio.com",
+          projectId: "sunvial-83daf",
+          storageBucket: "sunvial-83daf.appspot.com",
+          messagingSenderId: "441310331391",
+          appId: "1:441310331391:web:182ad8a7351ab0c342a7ca"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+        const selBtn = document.getElementById('selBtn');
+        const selFlyerBtn = document.getElementById('selFlyerBtn');
+        const selMerchBtn = document.getElementById("selMerchBtn");
+        const selMusicBtn = document.getElementById("selMusicBtn");
+        const selSlideshowBtn = document.getElementById('selSlideshowBtn');
+
+        const upBtn = document.getElementById('upBtn');
+        const nameBox = document.getElementById('nameBox');
+        const extention = document.getElementById('extention');
+        const progLab = document.getElementById('uploadProgress');
+        var videoSource = document.getElementById('videoSource');
+
+        
+
+        var files = [];
+        var reader = new FileReader();
+
+        var input = document.createElement('input');
+        input.type = "file";
+
+        input.onchange = e => {
+          files = e.target.files;
+
+          var extention = getFileExt(files[0]);
+          var name = getFileName(files[0]);
+
+          if(db_section == "video/"){
+            nameBox.value = name;
+          }
+          else if(db_section == "gigs/"){
+            var flyer = document.getElementById('flyer');
+            flyer.value = name;
+          }
+          else if(db_section == "merch/"){
+            var merch = document.getElementById('shop_image');
+            merch.value = name;
+          }
+          else if(db_section == "music/"){
+            var music = document.getElementById('album_image');
+            music.value = name;
+          }
+          else if(db_section == "slideshow/"){
+            var slideshow = document.getElementById('band_image_link');
+            slideshow.value = name;
+          }
+          
+
+          reader.readAsDataURL(files[0]);
+        }
+
+        reader.onload = () => {
+            if(db_section == "video/"){
+                videoSource.src = reader.result;
+                document.getElementById('myImg').load();
+            }
+            else if(db_section == "gigs/"){
+                document.getElementById("gigImage").src = reader.result;
+            }
+            else if(db_section == "merch/"){
+                document.getElementById('merchImage').src = reader.result;
+            }
+            else if(db_section == "music/"){
+                document.getElementById('musicImage').src = reader.result;
+            }
+            else if(db_section == "slideshow/"){
+                document.getElementById('slideshowImage').src = reader.result;
+            }
+        }
+
+        //-------------------SELECTION--------------------
+
+        selBtn.onclick = () => {
+          input.click();
+        }
+
+        selFlyerBtn.onclick = () => {
+          input.click();
+        }
+
+        selMerchBtn.onclick = () => {
+          input.click();
+        }
+
+        selMusicBtn.onclick = () => {
+          input.click();
+        }
+
+        selSlideshowBtn.onclick = () => {
+          input.click();
+        }
+
+        function getFileExt(file) {
+          var temp = file.name.split('.');
+          var ext = temp.slice((temp.length-1), (temp.length));
+
+          return "." + ext
+        }
+
+        function getFileName(file) {
+          var temp = file.name.split('.');
+          var fname = temp.slice(0,-1).join(".");
+
+          return fname
+        }
+
+        //-------------------UPLOAD--------------------
+
+        async function uploadProcess() {
+            if (files.length > 0) { // Check if files array is not empty
+                var imgToUpload = files[0];
+                var imgName = nameBox.value;
+                var flyer = document.getElementById('flyer').value;
+                var merch = document.getElementById("shop_image").value;
+                var music = document.getElementById('album_image').value;
+                var slideshow = document.getElementById('band_image_link').value;
+
+                const metaData = {
+                contentType: imgToUpload.type
+                }
+
+                const storage = getStorage();
+                const storageRef = sRef(storage, "Images/" + imgName + flyer + merch + music + slideshow);
+                
+                const uploadTask = uploadBytesResumable(storageRef, imgToUpload, metaData);
+                
+                // Wait for the upload to be completed
+                await new Promise((resolve, reject) => {
+                    uploadTask.on('state_changed',
+                        (snapshot) => {
+                            // Track upload progress if needed
+                        },
+                        (error) => {
+                            // Handle errors during upload
+                            reject(error);
+                        },
+                        () => {
+                            // Upload completed successfully
+                            resolve();
+                        }
+                    );
+                });
+
+                getDownloadURL(uploadTask.snapshot.ref).then((downloadUrl) => {
+                    sendUrl(downloadUrl);
+                    alert("Image Uploaded Successfully")
+                });
+                /*setTimeout(() => {
+                    getDownloadURL(uploadTask.snapshot.ref).then((downloadUrl) => {
+                        sendUrl(downloadUrl);
+                        alert("Image Uploaded Successfully")
+                    });
+                }, 3000);*/
+            }
+        }
+
+
+        upBtn.onclick = () => {
+            uploadProcess();
+        }
+
+        //-------------------RTD FUNCTIONS--------------------
+        function sendUrl(url){
+            let new_id = String(Math.floor(Math.random() * 1000001));
+            
+            if(db_section == "video/"){
+                var name = nameBox.value;
+                var ext = extention.innerHtml;
+                set(ref(database, db_section + new_id),{
+                    dataID: new_id,
+                    videoName: name,
+                    videoLink: url
+                })
+            }
+            else if(db_section == "gigs/"){
+                var date = document.getElementById('date').value;
+                var location = document.getElementById('location').value;
+                var state = document.getElementById('state').value;
+
+                if(date == ""){
+                    return 0;
+                }
+                else{
+                    set(ref(database, db_section + new_id), {
+                        dataID : new_id,
+                        date : date,
+                        location : location,
+                        state : state,
+                        flyer : url
+                    }).then(()=> {
+                        alert("Data Added Successfully")
+                    }).catch((error) => {
+                        alert("ERROR");
+                        console.log(error);
+                    });
+
+                    createButton(date, new_id);
+                }
+                clearInputValues();
+            }
+            else if(db_section == "merch/"){
+                var item_name = document.getElementById('item_name').value;
+                var item_shop_link = document.getElementById('shop_link').value;
+
+                if(item_name == ""){
+                    return 0;
+                }
+                else{
+                    set(ref(database, db_section + new_id), {
+                        dataID : new_id,
+                        itemName : item_name,
+                        itemLink : url,
+                        shopLink : item_shop_link,
+                    }).then(()=> {
+                        alert("Data Added Successfully")
+                    }).catch((error) => {
+                        alert("ERROR");
+                        console.log(error);
+                    });
+
+                    createButton(item_name, new_id);
+                }
+                clearInputValues();
+            }
+            else if(db_section == 'music/'){
+                var album_name = document.getElementById('album_name').value;
+                var album_image = document.getElementById('album_image').value;
+                var spotify_link = document.getElementById('spotify_link').value;
+
+                if(album_name == ""){
+                    return 0;
+                }
+                else{
+                    set(ref(database, db_section + new_id), {
+                        dataID : new_id,
+                        albumName : album_name,
+                        albumImage : url,
+                        spotifyLink : spotify_link,
+                    }).then(()=> {
+                        alert("Data Added Successfully")
+                    }).catch((error) => {
+                        alert("ERROR");
+                        console.log(error);
+                    });
+
+                    createButton(album_name, new_id);
+                }
+                clearInputValues();
+            }
+            else if(db_section == "slideshow/"){
+                var band_image_title = document.getElementById('band_image_title').value;
+                var band_image_link = document.getElementById('band_image_link').value;
+
+                if(band_image_title == ""){
+                    return 0;
+                }
+                else{
+                    set(ref(database, db_section + new_id), {
+                        dataID : new_id,
+                        imageName : band_image_title,
+                        imageLink : url,
+                    }).then(()=> {
+                        alert("Data Added Successfully")
+                    }).catch((error) => {
+                        alert("ERROR");
+                        console.log(error);
+                    });
+                    createButton(band_image_title, new_id);
+                }
+                clearInputValues();
+            }
+            retrieveAllData();
+        }
+
+        //-----------------------------------------------------------
+
+        const auth = getAuth();
+        const provider = new GoogleAuthProvider()
+
+        const signInButton = document.getElementById("signInButton");
+        const signOutButton = document.getElementById("signOutButton");
+        const message = document.getElementById("message");
+        const userName = document.getElementById("userName");
+        const userEmail = document.getElementById("userEmail");
+
+        signOutButton.style.display = "none";
+        message.style.display = "none";
+
+        const userSignIn = async() => {
+            signInWithPopup(auth, provider)
+            .then((result) => {
+                const user = result.user
+                console.log(user);
+            }).catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message
+            })
+        }
+
+        const userSignOut = async() => {
+            signOut(auth).then(() => {
+                alert("You have signed out successfully!");
+            }).catch((error) => {})
+        }
+
+        onAuthStateChanged(auth, (user) => {
+            if(user) {
+            signOutButton.style.display = "block";
+            message.style.display = "block";
+            userName.innerHTML = user.displayName;
+            userEmail.innerHTML = user.email
+            } else {
+            signOutButton.style.display = "none";
+            message.style.display = "none";
+            }
+        })
+
+        signInButton.addEventListener('click', userSignIn);
+        signOutButton.addEventListener('click', userSignOut);
+
+
+        
+
+        const database = getDatabase();
+
+        let db_section = "";
+        let item_showcase_section = 0;
+
+        const video_btn = document.getElementById("video_btn");
+        const gig_btn = document.getElementById("gig_btn");
+        const merch_btn = document.getElementById("merch_btn");
+        const music_btn = document.getElementById("music_btn");
+        const slideshow_btn = document.getElementById("slideshow_btn");
+
+        const back_btn = document.getElementsByClassName("go_back");
+        const add_btn = document.getElementsByClassName("writeBtn");
+        const update_btn = document.getElementsByClassName("updateBtn");
+        const delete_btn = document.getElementsByClassName("deleteBtn");
+        const clear_btn = document.getElementsByClassName("clearBtn");
+        
+        video_btn.addEventListener("click", ()=> {
+            document.getElementById("btn_box_container").style.display = "none";
+            document.getElementById("video-form-container").style.display = "flex";
+            db_section = "video/";
+            item_showcase_section = 0;
+            clearInputValues();
+            retrieveAllData();
+        });
+
+        gig_btn.addEventListener("click", ()=> {
+            document.getElementById("btn_box_container").style.display = "none";
+            document.getElementById("gig-form-container").style.display = "flex";
+            db_section = "gigs/";
+            item_showcase_section = 1;
+            clearInputValues();
+            retrieveAllData();
+        });
+
+        merch_btn.addEventListener("click", ()=> {
+            document.getElementById("btn_box_container").style.display = "none";
+            document.getElementById("merch-form-container").style.display = "flex";
+            db_section = "merch/";
+            item_showcase_section = 2;
+            clearInputValues();
+            retrieveAllData()
+        });
+
+        music_btn.addEventListener("click", ()=> {
+            document.getElementById("btn_box_container").style.display = "none";
+            document.getElementById("album-form-container").style.display = "flex";
+            item_showcase_section = 3;
+            db_section = "music/";
+            clearInputValues();
+            retrieveAllData();
+        });
+
+        slideshow_btn.addEventListener("click", ()=> {
+            document.getElementById("btn_box_container").style.display = "none";
+            document.getElementById("slideshow-form-container").style.display = "flex";
+            item_showcase_section = 4;
+            db_section = "slideshow/";
+            clearInputValues();
+            retrieveAllData();
+        });
+
+        function back(){
+            clearInputValues();
+            document.getElementById("btn_box_container").style.display = "block";
+            document.getElementById("video-form-container").style.display = "none";
+            document.getElementById("gig-form-container").style.display = "none";
+            document.getElementById("merch-form-container").style.display = "none";
+            document.getElementById("album-form-container").style.display = "none";
+            document.getElementById("slideshow-form-container").style.display = "none";
+            db_section = "";
+        }
+
+        function writeData(){
+            let new_id = String(Math.floor(Math.random() * 1000001));
+            if(db_section == "video/"){
+                var video_name = document.getElementById('video_name').value;
+                var video_link = document.getElementById('video_link').value;
+
+                if(video_name == ""){
+                    return 0;
+                }
+                else{
+                    set(ref(database, db_section + new_id), {
+                        dataID : new_id,
+                        videoName : video_name,
+                        videoLink : video_link,
+                    }).then(()=> {
+                        alert("Data Added Successfully")
+                    }).catch((error) => {
+                        alert("ERROR");
+                        console.log(error);
+                    });
+
+                    createButton(video_name, new_id);
+                }
+                clearInputValues();
+            }
+            else if(db_section == "gigs/"){
+                uploadProcess()
+            }
+            else if(db_section == "merch/"){
+                uploadProcess();
+            }
+            else if(db_section == "music/"){
+                uploadProcess();
+            }
+            else if(db_section == "slideshow/"){
+                uploadProcess();
+            }
+            retrieveAllData(); 
+        }
+
+            function retrieveData(id){
+                const databaseRef = ref(database);
+                if(db_section == "video/"){
+                    var dataID = document.getElementById("currentVideoID");
+                    var nameBox = document.getElementById('nameBox');
+                    var video_link = document.getElementById('video_link');
+                    var videoSource = document.getElementById('videoSource');
+
+                    get(child(databaseRef, db_section + id)).then((snapshot) => {
+                        if(snapshot.exists()){
+                            dataID.value = snapshot.val().dataID;
+                            nameBox.value = snapshot.val().videoName;
+                            videoSource.src = snapshot.val().videoLink;
+                            document.getElementById('myImg').load();
+                        }
+                        else{
+                            alert("gig doesn't exist!");
+                        }
+                    }).catch((error)=>{
+                        alert("Didn't work :(")
+                        console.log(error);
+                    })
+                }
+                else if(db_section == "gigs/"){
+                    var dataID = document.getElementById("currentGigID");
+                    var date = document.getElementById('date');
+                    var location = document.getElementById('location');
+                    var state = document.getElementById('state');
+                    var flyer = document.getElementById('flyer');
+                    
+
+                    get(child(databaseRef, db_section + id)).then((snapshot) => {
+                        if(snapshot.exists()){
+                            dataID.value = snapshot.val().dataID;
+                            date.value = snapshot.val().date;
+                            location.value = snapshot.val().location;
+                            state.value = snapshot.val().state;
+                            flyer.value = snapshot.val().flyer;
+                            document.getElementById("gigImage").src = snapshot.val().flyer;
+                        }
+                        else{
+                            alert("gig doesn't exist!");
+                        }
+                    }).catch((error)=>{
+                        alert("Didn't work :(")
+                        console.log(error);
+                    })
+                }
+                else if(db_section == "merch/"){
+                    var dataID = document.getElementById("currentMerchID");
+                    var item_name = document.getElementById("item_name");
+                    var shop_link = document.getElementById('shop_image');
+                    var shop_image = document.getElementById('shop_link');
+
+                    get(child(databaseRef, db_section + id)).then((snapshot) => {
+                        if(snapshot.exists()){
+                            dataID.value = snapshot.val().dataID;
+                            item_name.value = snapshot.val().itemName;
+                            shop_link.value = snapshot.val().shopLink;
+                            shop_image.value = snapshot.val().itemLink;
+                            document.getElementById("merchImage").src = snapshot.val().itemLink;
+                        }
+                        else{
+                            alert("gig doesn't exist!");
+                        }
+                    }).catch((error)=>{
+                        alert("Didn't work :(")
+                        console.log(error);
+                    })
+                }
+                else if(db_section == "music/"){
+                    var dataID = document.getElementById("currentAlbumID");
+                    var album_name = document.getElementById('album_name');
+                    var album_image = document.getElementById('album_image');
+                    var spotify_link = document.getElementById('spotify_link');
+
+                    get(child(databaseRef, db_section + id)).then((snapshot) => {
+                        if(snapshot.exists()){
+                            dataID.value = snapshot.val().dataID;
+                            album_name.value = snapshot.val().albumName;
+                            spotify_link.value = snapshot.val().spotifyLink;
+                            album_image.value = snapshot.val().albumImage;
+                            document.getElementById("musicImage").src = snapshot.val().albumImage;
+                        }
+                        else{
+                            alert("gig doesn't exist!");
+                        }
+                    }).catch((error)=>{
+                        alert("Didn't work :(")
+                        console.log(error);
+                    })
+                }
+                else if(db_section == "slideshow/"){
+                    var dataID = document.getElementById("currentSlideshowID");
+                    var band_image_title = document.getElementById('band_image_title');
+                    var band_image_link = document.getElementById('band_image_link');
+                    var imageTestDiv = document.getElementById('image_test');
+
+                    get(child(databaseRef, db_section + id)).then((snapshot) => {
+                        if(snapshot.exists()){
+                            dataID.value = snapshot.val().dataID;
+                            band_image_title.value = snapshot.val().imageName;
+                            band_image_link.value = snapshot.val().imageLink;
+                            // Update background image
+                            document.getElementById("slideshowImage").src = snapshot.val().imageLink;
+                        }
+                        else{
+                            alert("gig doesn't exist!");
+                        }
+                    }).catch((error)=>{
+                        alert("Didn't work :(")
+                        console.log(error);
+                    })
+                }   
+            }
+
+            function updateData(){
+                if(db_section == "video/"){
+                    var dataID = document.getElementById("currentVideoID");
+                    if(dataID.value == ""){
+                        return 0;
+                    }
+                    else{
+                        var video_name = document.getElementById('video_name').value;
+                        var video_link = document.getElementById('video_link').value;
+                    
+                        update(ref(database, db_section + dataID.value), {
+                            videoName : video_name,
+                            videoLink : video_link
+                        }).then(() => {
+                            alert("Update Recieved")
+                        }).catch((error) => {
+                            alert("Error")
+                            console.log(error)
+                        })
+                    }
+                    clearInputValues();
+                }
+                else if(db_section == "gigs/"){
+                    var dataID = document.getElementById("currentGigID");
+                    if(dataID.value == ""){
+                        return 0;
+                    }
+                    else{
+                        var date = document.getElementById('date').value;
+                        var location = document.getElementById('location').value;
+                        var state = document.getElementById('state').value;
+                        var flyer = document.getElementById('flyer').value;
+                    
+                        update(ref(database, db_section + dataID.value), {
+                            date : date,
+                            location : location,
+                            state : state,
+                            flyer : flyer
+                        }).then(() => {
+                            alert("Update Recieved")
+                        }).catch((error) => {
+                            alert("Error")
+                            console.log(error)
+                        })
+                    }
+                    clearInputValues();
+                }
+                else if(db_section == "merch/"){
+                    var dataID = document.getElementById("currentMerchID");
+                    if(dataID.value == ""){
+                        return 0;
+                    }
+                    else {
+                        var item_name = document.getElementById("item_name").value;
+                        var shop_link = document.getElementById('shop_image').value;
+                        var shop_image = document.getElementById('shop_link').value;
+
+                        update(ref(database, db_section + dataID.value), {
+                            itemName : item_name,
+                            itemLink : shop_image,
+                            shopLink : shop_link,
+                        }).then(() => {
+                            alert("Update Recieved")
+                        }).catch((error) => {
+                            alert("Error")
+                            console.log(error)
+                        })
+                    }
+                    clearInputValues();
+                }
+                else if(db_section == "music/"){
+                    var dataID = document.getElementById("currentAlbumID");
+                    if(dataID.value == ""){
+                        return 0;
+                    }
+                    else {
+                        var album_name = document.getElementById('album_name').value;
+                        var album_image = document.getElementById('album_image').value;
+                        var spotify_link = document.getElementById('spotify_link').value;
+
+                        update(ref(database, db_section + dataID.value), {
+                            albumName : album_name,
+                            albumImage : album_image,
+                            spotifyLink : spotify_link,
+                        }).then(() => {
+                            alert("Update Recieved")
+                        }).catch((error) => {
+                            alert("Error")
+                            console.log(error)
+                        })
+                    }
+                    clearInputValues();
+                }
+                else if(db_section == "slideshow/"){
+                    var dataID = document.getElementById("currentSlideshowID");
+                    if(dataID.value == ""){
+                        return 0;
+                    }
+                    else {
+                        var band_image_title = document.getElementById('band_image_title').value;
+                        var band_image_link = document.getElementById('band_image_link').value;
+
+                        update(ref(database, db_section + dataID.value), {
+                            imageName : band_image_title,
+                            imageLink : band_image_link,
+                        }).then(() => {
+                            alert("Update Recieved")
+                        }).catch((error) => {
+                            alert("Error")
+                            console.log(error)
+                        })
+                    }
+                    clearInputValues();
+                }
+                
+                retrieveAllData();
+            }
+
+            function deleteData() {
+                if(db_section == "video/"){
+                    var dataID = document.getElementById("currentVideoID");
+
+                    if(dataID.value == ""){
+                        return 0;
+                    }
+                    else {
+                        remove(ref(database, db_section + dataID.value)).then(() => {
+                            alert("Data Deleted Successfully")
+                        }).catch((error) => {
+                            alert("Data Delete Failed")
+                            console.log(error)
+                        })
+                    }
+                    clearInputValues();
+                }
+                else if(db_section == "gigs/"){
+                    var dataID = document.getElementById("currentGigID");
+
+                    if(dataID.value == ""){
+                        return 0;
+                    }
+                    else {
+                        remove(ref(database, db_section + dataID.value)).then(() => {
+                            alert("Data Deleted Successfully")
+                        }).catch((error) => {
+                            alert("Data Delete Failed")
+                            console.log(error)
+                        })
+                    }
+                    clearInputValues();
+                }
+                else if(db_section == "merch/"){
+                    var dataID = document.getElementById("currentMerchID");
+
+                    if(dataID.value == ""){
+                        return 0;
+                    }
+                    else {
+                        remove(ref(database, db_section + dataID.value)).then(() => {
+                            alert("Data Deleted Successfully")
+                        }).catch((error) => {
+                            alert("Data Delete Failed")
+                            console.log(error)
+                        })
+                    }
+                    clearInputValues();
+                }
+                else if(db_section == "music/"){
+                    var dataID = document.getElementById("currentAlbumID");
+
+                    if(dataID.value == ""){
+                        return 0;
+                    }
+                    else {
+                        remove(ref(database, db_section + dataID.value)).then(() => {
+                            alert("Data Deleted Successfully")
+                        }).catch((error) => {
+                            alert("Data Delete Failed")
+                            console.log(error)
+                        })
+                    }
+                    clearInputValues();
+                }
+                else if(db_section == "slideshow/"){
+                    var dataID = document.getElementById("currentSlideshowID");
+
+                    if(dataID.value == ""){
+                        return 0;
+                    }
+                    else {
+                        remove(ref(database, db_section + dataID.value)).then(() => {
+                            alert("Data Deleted Successfully")
+                        }).catch((error) => {
+                            alert("Data Delete Failed")
+                            console.log(error)
+                        })
+                    }
+                    clearInputValues();
+                }
+
+                retrieveAllData();
+            }
+
+            function retrieveAllData(){
+                const databaseRef = ref(database);
+                const showcaseDiv = document.querySelectorAll('.item_showcase');
+    
+                // Clear existing buttons
+                showcaseDiv[item_showcase_section].innerHTML = '';
+
+                get(child(databaseRef, db_section)).then((snapshot) => {
+
+                    snapshot.forEach(childSnapshot => {
+                        if(db_section == "video/"){
+                            createButton(childSnapshot.val().videoName, childSnapshot.val().dataID);
+                        }
+                        else if(db_section == "gigs/"){
+                            createButton(childSnapshot.val().date, childSnapshot.val().dataID);
+                        }
+                        else if(db_section == "merch/"){
+                            createButton(childSnapshot.val().itemName, childSnapshot.val().dataID);
+                        }
+                        else if(db_section == "music/"){
+                            createButton(childSnapshot.val().albumName, childSnapshot.val().dataID);
+                        }
+                        else if(db_section == "slideshow/"){
+                            createButton(childSnapshot.val().imageName, childSnapshot.val().dataID);
+                        }
+                        
+                    })
+
+                })
+            }
+
+            function clearInputValues() {
+                if(db_section == "video/"){
+                    document.getElementById('currentVideoID').value = '';
+                    videoSource.src = '';
+                    document.getElementById('nameBox').value = '';
+                    document.getElementById('myImg').load();
+                }
+                else if(db_section == "gigs/"){
+                    document.getElementById('currentGigID').value = '';
+                    document.getElementById('date').value = '';
+                    document.getElementById('location').value = '';
+                    document.getElementById('state').value = '';
+                    document.getElementById('flyer').value = '';
+                    document.getElementById("gigImage").src = '';
+                }
+                else if(db_section == "merch/"){
+                    document.getElementById("currentMerchID").value = "";
+                    document.getElementById("item_name").value = "";
+                    document.getElementById('shop_image').value = "";
+                    document.getElementById('shop_link').value = "";
+                    document.getElementById("merchImage").src = '';
+                }
+                else if(db_section == "music/"){
+                    document.getElementById("currentAlbumID").value = "";
+                    document.getElementById('album_name').value = "";
+                    document.getElementById('album_image').value = "";
+                    document.getElementById('spotify_link').value = "";
+                    document.getElementById("musicImage").src = '';
+                }
+                else if(db_section == "slideshow/"){
+                    document.getElementById("currentSlideshowID").value = "";
+                    document.getElementById('band_image_title').value = "";
+                    document.getElementById('band_image_link').value = "";
+                    document.getElementById("slideshowImage").src = '';
+                }
+                
+            }
+
+            function createButton(title, id) {
+                const showcaseDiv = document.querySelectorAll('.item_showcase');
+                const button = document.createElement('button');
+                button.textContent = title;
+                button.classList.add('snapshot-button');
+                button.id = id; // Store the ID as a data attribute
+                button.addEventListener('click', function() {
+                    const clickedId = button.id;
+                    // Use the ID as needed, such as for retrieving data from the database
+                    retrieveData(clickedId);
+                });
+                showcaseDiv[item_showcase_section].insertBefore(button, showcaseDiv.firstChild);
+            }
+
+            for (var i = 0; i < add_btn.length; i++) {
+                add_btn[i].addEventListener("click", writeData);
+            }
+            for (var i = 0; i < update_btn.length; i++) {
+                update_btn[i].addEventListener("click", updateData);
+            }
+            for (var i = 0; i < delete_btn.length; i++) {
+                delete_btn[i].addEventListener("click", deleteData);
+            }
+            for (var i = 0; i < clear_btn.length; i++) {
+                clear_btn[i].addEventListener("click", clearInputValues);
+            }
+            for (var i = 0; i < back_btn.length; i++) {
+                back_btn[i].addEventListener("click", back);
+            }
+
+    </script>
+</body>
+</html>

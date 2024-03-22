@@ -1,0 +1,373 @@
+body{
+    display: block;
+    margin: auto;
+    background-color: blanchedalmond;
+}
+
+button:hover{
+    background-color: rgb(193, 193, 192);
+    cursor: pointer;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+}
+
+.btn_box_container{
+    display: block;
+    padding-top: 190px;
+    width: 100%;
+    height: 600px;
+}
+
+#signInButton {
+    font-size: 25px;
+    margin-left: 50px;
+    width: 200px;
+    height: auto;
+    font-weight: bold;
+    border-radius: 8px;
+    background-color: white;
+    cursor: pointer;
+}
+
+#signOutButton {
+    font-size: 25px;
+    margin-left: 50px;
+    width: 200px;
+    height: auto;
+    font-weight: bold;
+    border-radius: 8px;
+    background-color: white;
+    cursor: pointer;
+}
+
+#message {
+    margin-left: 50px;
+}
+
+.btn_box_container button{
+    font-size: 35px;
+    width: 200px;
+    height: auto;
+    font-weight: bold;
+    border-radius: 8px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.btn_box_container button:hover{
+    background-color: rgb(193, 193, 192);
+}
+
+.starting_title{
+    text-align: center;
+    font-size: 2.5vw;
+}
+
+.button_box{
+    display: flex;
+    width: 100%;
+    height: 60%;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.go_back{
+    width: 100px;
+    height: 25px;
+    font-size: 18px;
+    border-radius: 8px;
+    font-weight: bold;
+    background-color: white;
+}
+
+.video-form-container{
+    display: none;
+    flex-direction: column;
+    margin: auto;
+    width: 80%;
+    height: 700px;
+    margin-top: 200px;
+    height: auto;
+}
+
+
+
+.currentVideoID{
+    display: none;
+}
+
+#myImg {
+    display: block;
+    height: 200px;
+    width: 200px;
+    border: 2px solid black;
+    margin: auto;
+}
+
+.item_showcase {
+    margin-bottom: 100px;
+    display: flex;
+    width: 100%;
+    height: auto;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.snapshot-button {
+    font-size: 35px;
+    width: 200px;
+    height: auto;
+    font-weight: bold;
+    border-radius: 8px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.video_btn_container{
+    padding: 30px;
+    padding-top: 50px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.video_btn_container button{
+    font-size: 35px;
+    width: 200px;
+    height: auto;
+    font-weight: bold;
+    border-radius: 8px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.video_btn_container button:hover{
+    background-color: rgb(193, 193, 192);
+}
+
+.image_test {
+    display: block;
+    margin: auto;
+    width: 300px;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+}
+
+.gig-form-container{
+    display: none;
+    flex-direction: column;
+    margin: auto;
+    width: 80%;
+    height: 700px;
+    margin-top: 100px;
+    height: auto;
+}
+
+.gig-form-container input{
+    width: 60%;
+    height: 50px;
+    margin: auto;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    font-size: larger;
+}
+
+.currentGigID{
+    display: none;
+}
+
+.gig_btn_container{
+    padding: 30px;
+    padding-top: 50px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#selFlyerBtn{
+    display: block;
+    margin: auto;
+    width: 200px;
+    height: 40px;
+    font-size: 28px;
+}
+
+.gigImage{
+    width: 200px;
+    height: 200px;
+    border: solid 2px black;
+    display: block;
+    margin: auto;
+}
+
+.gig_btn_container button{
+    font-size: 35px;
+    width: 200px;
+    height: auto;
+    font-weight: bold;
+    border-radius: 8px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.gig_btn_container button:hover{
+    background-color: rgb(193, 193, 192);
+}
+
+.merch-form-container{
+    display: none;
+    flex-direction: column;
+    margin: auto;
+    width: 80%;
+    height: 700px;
+    margin-top: 100px;
+    height: auto;
+}
+
+.merch-form-container input{
+    width: 60%;
+    height: 50px;
+    margin: auto;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    font-size: larger;
+}
+
+.currentMerchID{
+    display: none;
+}
+
+#selMerchBtn{
+    display: block;
+    margin: auto;
+    width: 200px;
+    height: 40px;
+    font-size: 28px;
+}
+
+.merch_btn_container{
+    padding: 30px;
+    padding-top: 50px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.merch_btn_container button{
+    font-size: 35px;
+    width: 200px;
+    height: auto;
+    font-weight: bold;
+    border-radius: 8px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.merch_btn_container button:hover{
+    background-color: rgb(193, 193, 192);
+}
+
+.album-form-container{
+    display: none;
+    flex-direction: column;
+    margin: auto;
+    width: 80%;
+    height: 700px;
+    margin-top: 100px;
+    height: auto;
+}
+
+.album-form-container input{
+    width: 60%;
+    height: 50px;
+    margin: auto;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    font-size: larger;
+}
+
+.currentAlbumID{
+    display: none;
+}
+
+#selMusicBtn{
+    display: block;
+    margin: auto;
+    width: 200px;
+    height: 40px;
+    font-size: 28px;
+}
+
+.album_btn_container{
+    padding: 30px;
+    padding-top: 50px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.album_btn_container button{
+    font-size: 35px;
+    width: 200px;
+    height: auto;
+    font-weight: bold;
+    border-radius: 8px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.album_btn_container button:hover{
+    background-color: rgb(193, 193, 192);
+}
+
+.slideshow-form-container{
+    display: none;
+    flex-direction: column;
+    margin: auto;
+    width: 80%;
+    height: 700px;
+    margin-top: 100px;
+    height: auto;
+}
+
+.slideshow-form-container input{
+    width: 60%;
+    height: 50px;
+    margin: auto;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    font-size: larger;
+}
+
+.currentSlideshowID{
+    display: none;
+}
+
+#selSlideshowBtn{
+    display: block;
+    margin: auto;
+    width: 200px;
+    height: 40px;
+    font-size: 28px;
+}
+
+.slideshow_btn_container{
+    padding: 30px;
+    padding-top: 50px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.slideshow_btn_container button{
+    font-size: 35px;
+    width: 200px;
+    height: auto;
+    font-weight: bold;
+    border-radius: 8px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.slideshow_btn_container button:hover{
+    background-color: rgb(193, 193, 192);
+}
